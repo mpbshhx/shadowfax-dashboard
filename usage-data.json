@@ -1,0 +1,345 @@
+{
+  "updated_at": "2026-03-17T16:40:48.331354",
+  "hf_balance": null,
+  "anthropic_usage": null,
+  "days": [
+    {
+      "date": "2026-02-16",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 0
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-17",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 0
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-18",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 0
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-19",
+      "models": {
+        "opus": {
+          "runs": 2,
+          "est_tokens": 4000,
+          "est_cost_usd": 0.06,
+          "context_used_k": 15
+        }
+      },
+      "total_est_cost_usd": 0.06
+    },
+    {
+      "date": "2026-02-20",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 18
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-21",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 19
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-22",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 16
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-23",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 0
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-24",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 0
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-25",
+      "models": {},
+      "total_est_cost_usd": 0
+    },
+    {
+      "date": "2026-02-26",
+      "models": {
+        "opus": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.03,
+          "context_used_k": 15
+        }
+      },
+      "total_est_cost_usd": 0.03
+    },
+    {
+      "date": "2026-02-27",
+      "models": {},
+      "total_est_cost_usd": 0
+    },
+    {
+      "date": "2026-02-28",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 18
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-01",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 20
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-02",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 19
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-03",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 20
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-04",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 19
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-05",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 19
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-06",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 21
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-07",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 21
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-08",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 23
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-09",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 25
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-10",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 25
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-11",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 13
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-12",
+      "models": {
+        "kimi": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.0003,
+          "context_used_k": 32
+        },
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 13
+        }
+      },
+      "total_est_cost_usd": 0.0063
+    },
+    {
+      "date": "2026-03-13",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 13
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-14",
+      "models": {},
+      "total_est_cost_usd": 0
+    },
+    {
+      "date": "2026-03-15",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 14
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-16",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 14
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-17",
+      "models": {},
+      "total_est_cost_usd": 0
+    }
+  ]
+}
