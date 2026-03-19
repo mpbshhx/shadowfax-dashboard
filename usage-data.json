@@ -1,32 +1,8 @@
 {
-  "updated_at": "2026-03-17T17:37:30.339245",
+  "updated_at": "2026-03-19T07:00:27.136233",
   "hf_balance": null,
   "anthropic_usage": null,
   "days": [
-    {
-      "date": "2026-02-16",
-      "models": {
-        "opus": {
-          "runs": 1,
-          "est_tokens": 2000,
-          "est_cost_usd": 0.03,
-          "context_used_k": 0
-        }
-      },
-      "total_est_cost_usd": 0.03
-    },
-    {
-      "date": "2026-02-17",
-      "models": {
-        "opus": {
-          "runs": 1,
-          "est_tokens": 2000,
-          "est_cost_usd": 0.03,
-          "context_used_k": 0
-        }
-      },
-      "total_est_cost_usd": 0.03
-    },
     {
       "date": "2026-02-18",
       "models": {
@@ -340,6 +316,30 @@
       "date": "2026-03-17",
       "models": {},
       "total_est_cost_usd": 0
+    },
+    {
+      "date": "2026-03-18",
+      "models": {
+        "sonnet": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.006,
+          "context_used_k": 20
+        }
+      },
+      "total_est_cost_usd": 0.006
+    },
+    {
+      "date": "2026-03-19",
+      "models": {
+        "openrouter/minimax/minimax-m2.7": {
+          "runs": 1,
+          "est_tokens": 2000,
+          "est_cost_usd": 0.002,
+          "context_used_k": 20
+        }
+      },
+      "total_est_cost_usd": 0.002
     }
   ]
 }
