@@ -1,0 +1,32 @@
+{
+  "timestamp": "2026-03-21T07:00:53.305710",
+  "anthropic": {
+    "mtd_spend": null,
+    "limit": null,
+    "currency": "USD",
+    "error": "ANTHROPIC_API_KEY not found in openclaw.json env"
+  },
+  "openrouter": {
+    "mtd_spend": 22.49986032,
+    "limit": 20,
+    "limit_remaining": 20,
+    "currency": "USD",
+    "usage_daily": 0,
+    "usage_weekly": 22.49986032,
+    "usage_monthly": 22.49986032,
+    "limit_reset": "daily",
+    "total_credits": 45,
+    "error": null,
+    "lifetime_usage": 42.686010145
+  },
+  "huggingface": {
+    "mtd_spend": null,
+    "limit": null,
+    "currency": "USD",
+    "billing_mode": "prepaid",
+    "period_end": 1775001600,
+    "is_pro": true,
+    "error": null,
+    "_no_api": "HuggingFace has no public billing/usage API. MTD spend requires scraping app.huggingface.co/settings/billing or using the HF PRO dashboard. No API endpoint exists for usage data."
+  }
+}

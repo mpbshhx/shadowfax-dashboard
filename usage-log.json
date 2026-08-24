@@ -1,0 +1,375 @@
+{
+  "updated_at": "2026-03-19T15:35:13.615Z",
+  "daily": [
+    {
+      "date": "2026-02-14",
+      "total_tokens": 291000,
+      "total_cost": 4.364999999999999,
+      "models": {
+        "opus": {
+          "tokens": 291000,
+          "cost": 4.364999999999999,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-15",
+      "total_tokens": 2000,
+      "total_cost": 0.03,
+      "models": {
+        "opus": {
+          "tokens": 2000,
+          "cost": 0.03,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-16",
+      "total_tokens": 2000,
+      "total_cost": 0.03,
+      "models": {
+        "opus": {
+          "tokens": 2000,
+          "cost": 0.03,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-17",
+      "total_tokens": 2000,
+      "total_cost": 0.03,
+      "models": {
+        "opus": {
+          "tokens": 2000,
+          "cost": 0.03,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-18",
+      "total_tokens": 2000,
+      "total_cost": 0.03,
+      "models": {
+        "opus": {
+          "tokens": 2000,
+          "cost": 0.03,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-19",
+      "total_tokens": 14000,
+      "total_cost": 0.21,
+      "models": {
+        "opus": {
+          "tokens": 14000,
+          "cost": 0.21,
+          "runs": 2
+        }
+      }
+    },
+    {
+      "date": "2026-02-20",
+      "total_tokens": 14400,
+      "total_cost": 0.216,
+      "models": {
+        "opus": {
+          "tokens": 14400,
+          "cost": 0.216,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-21",
+      "total_tokens": 15200,
+      "total_cost": 0.228,
+      "models": {
+        "opus": {
+          "tokens": 15200,
+          "cost": 0.228,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-22",
+      "total_tokens": 12800,
+      "total_cost": 0.192,
+      "models": {
+        "opus": {
+          "tokens": 12800,
+          "cost": 0.192,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-23",
+      "total_tokens": 2000,
+      "total_cost": 0.03,
+      "models": {
+        "opus": {
+          "tokens": 2000,
+          "cost": 0.03,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-24",
+      "total_tokens": 2000,
+      "total_cost": 0.03,
+      "models": {
+        "opus": {
+          "tokens": 2000,
+          "cost": 0.03,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-26",
+      "total_tokens": 12000,
+      "total_cost": 0.18,
+      "models": {
+        "opus": {
+          "tokens": 12000,
+          "cost": 0.18,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-02-28",
+      "total_tokens": 14400,
+      "total_cost": 0.0432,
+      "models": {
+        "sonnet": {
+          "tokens": 14400,
+          "cost": 0.0432,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-01",
+      "total_tokens": 16000,
+      "total_cost": 0.048,
+      "models": {
+        "sonnet": {
+          "tokens": 16000,
+          "cost": 0.048,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-02",
+      "total_tokens": 15200,
+      "total_cost": 0.0456,
+      "models": {
+        "sonnet": {
+          "tokens": 15200,
+          "cost": 0.0456,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-03",
+      "total_tokens": 16000,
+      "total_cost": 0.048,
+      "models": {
+        "sonnet": {
+          "tokens": 16000,
+          "cost": 0.048,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-04",
+      "total_tokens": 15200,
+      "total_cost": 0.0456,
+      "models": {
+        "sonnet": {
+          "tokens": 15200,
+          "cost": 0.0456,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-05",
+      "total_tokens": 15200,
+      "total_cost": 0.0456,
+      "models": {
+        "sonnet": {
+          "tokens": 15200,
+          "cost": 0.0456,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-06",
+      "total_tokens": 16800,
+      "total_cost": 0.0504,
+      "models": {
+        "sonnet": {
+          "tokens": 16800,
+          "cost": 0.0504,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-07",
+      "total_tokens": 16800,
+      "total_cost": 0.0504,
+      "models": {
+        "sonnet": {
+          "tokens": 16800,
+          "cost": 0.0504,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-08",
+      "total_tokens": 18400,
+      "total_cost": 0.0552,
+      "models": {
+        "sonnet": {
+          "tokens": 18400,
+          "cost": 0.0552,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-09",
+      "total_tokens": 20000,
+      "total_cost": 0.06,
+      "models": {
+        "sonnet": {
+          "tokens": 20000,
+          "cost": 0.06,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-10",
+      "total_tokens": 20000,
+      "total_cost": 0.06,
+      "models": {
+        "sonnet": {
+          "tokens": 20000,
+          "cost": 0.06,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-11",
+      "total_tokens": 10400,
+      "total_cost": 0.0312,
+      "models": {
+        "sonnet": {
+          "tokens": 10400,
+          "cost": 0.0312,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-12",
+      "total_tokens": 36000,
+      "total_cost": 0.03504,
+      "models": {
+        "minimax": {
+          "tokens": 25600,
+          "cost": 0.00384,
+          "runs": 1
+        },
+        "sonnet": {
+          "tokens": 10400,
+          "cost": 0.0312,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-13",
+      "total_tokens": 10400,
+      "total_cost": 0.0312,
+      "models": {
+        "sonnet": {
+          "tokens": 10400,
+          "cost": 0.0312,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-15",
+      "total_tokens": 11200,
+      "total_cost": 0.0336,
+      "models": {
+        "sonnet": {
+          "tokens": 11200,
+          "cost": 0.0336,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-16",
+      "total_tokens": 11200,
+      "total_cost": 0.0336,
+      "models": {
+        "sonnet": {
+          "tokens": 11200,
+          "cost": 0.0336,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-18",
+      "total_tokens": 16000,
+      "total_cost": 0.048,
+      "models": {
+        "sonnet": {
+          "tokens": 16000,
+          "cost": 0.048,
+          "runs": 1
+        }
+      }
+    },
+    {
+      "date": "2026-03-19",
+      "total_tokens": 16000,
+      "total_cost": 0.0024,
+      "models": {
+        "minimax": {
+          "tokens": 16000,
+          "cost": 0.0024,
+          "runs": 1
+        }
+      }
+    }
+  ],
+  "openrouter_total_cost": 0,
+  "openrouter_total_tokens": 0,
+  "stale": true,
+  "source": "csv",
+  "api_reachable": false
+}

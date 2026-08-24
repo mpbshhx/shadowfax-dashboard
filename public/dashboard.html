@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadowfax Token Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #1a1a2e;
+      --card: #16213e;
+      --border: #2a2a4e;
+      --accent: #7c3aed;
+      --accent2: #a78bfa;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --minimax: #38bdf8;
+      --sonnet: #34d399;
+      --opus: #fbbf24;
+      --haiku: #f472b6;
+      --other: #94a3b8;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .header h1 { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+    .header .subtitle { color: var(--muted); font-size: 0.9rem; margin-top: 2px; }
+    .refresh-btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .refresh-btn:hover { background: var(--accent2); }
+    .refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .control-group { display: flex; align-items: center; gap: 8px; }
+    .control-group label { color: var(--muted); font-size: 0.85rem; white-space: nowrap; }
+
+    select, input[type="date"] {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    select:focus, input:focus { border-color: var(--accent); }
+
+    .stale-banner {
+      background: #7f1d1d;
+      border: 1px solid #991b1b;
+      color: #fca5a5;
+      padding: 10px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+
+    /* KPI Cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .kpi h3 { color: var(--muted); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .kpi .value { font-size: 1.6rem; font-weight: 700; color: var(--text); }
+    .kpi .value.accent { color: var(--accent); }
+    .kpi .value.success { color: var(--success); }
+    .kpi .value.warning { color: var(--warning); }
+    .kpi .value.danger { color: var(--danger); }
+    .kpi .sub { color: var(--muted); font-size: 0.8rem; margin-top: 4px; }
+
+    /* Charts */
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+
+    @media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
+
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .chart-card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; color: var(--text); }
+    .chart-wrap { position: relative; height: 280px; }
+
+    /* Full-width chart */
+    .chart-full {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .chart-full h2 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+    .chart-full .chart-wrap { height: 260px; }
+
+    /* Table */
+    .table-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      overflow-x: auto;
+    }
+
+    .table-card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th {
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(124, 58, 237, 0.05); }
+
+    .model-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .dot-minimax { background: var(--minimax); }
+    .dot-sonnet { background: var(--sonnet); }
+    .dot-opus { background: var(--opus); }
+    .dot-haiku { background: var(--haiku); }
+    .dot-other { background: var(--other); }
+
+    .cost-cell { font-weight: 600; color: var(--accent); }
+    .date-cell { color: var(--muted); font-size: 0.85rem; }
+
+    /* Model legend */
+    .model-legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 20px 0;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="header">
+      <div>
+        <h1>Token Usage Dashboard</h1>
+        <div class="subtitle">OpenRouter AI spend for Marcus's operation</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span id="lastUpdated" style="color:var(--muted);font-size:0.85rem;"></span>
+        <button class="refresh-btn" id="refreshBtn" onclick="forceRefresh()">Refresh Data</button>
+      </div>
+    </div>
+
+    <div id="staleBanner" class="stale-banner" style="display:none;">
+      Using cached data — OpenRouter API was unreachable at last refresh.
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>Model:</label>
+        <select id="modelFilter" onchange="renderAll()">
+          <option value="all">All Models</option>
+          <option value="minimax">MiniMax M2.7</option>
+          <option value="sonnet">Claude Sonnet 4.6</option>
+          <option value="opus">Claude Opus 4.6</option>
+          <option value="haiku">Claude Haiku 3.5</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Range:</label>
+        <select id="rangeFilter" onchange="renderAll()">
+          <option value="7">Last 7 days</option>
+          <option value="30" selected>Last 30 days</option>
+          <option value="90">Last 90 days</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi">
+        <h3>Today Cost</h3>
+        <div class="value accent" id="kpi-today-cost">--</div>
+        <div class="sub" id="kpi-today-tokens">-- tokens</div>
+      </div>
+      <div class="kpi">
+        <h3>MTD Cost</h3>
+        <div class="value accent" id="kpi-mtd-cost">--</div>
+        <div class="sub" id="kpi-mtd-tokens">-- tokens</div>
+      </div>
+      <div class="kpi">
+        <h3>Projected EOM</h3>
+        <div class="value warning" id="kpi-proj-cost">--</div>
+        <div class="sub">Linear extrapolation</div>
+      </div>
+      <div class="kpi">
+        <h3>Total Spent</h3>
+        <div class="value" id="kpi-total-cost">--</div>
+        <div class="sub" id="kpi-total-tokens">-- total tokens</div>
+      </div>
+      <div class="kpi">
+        <h3>Best Day</h3>
+        <div class="value success" id="kpi-best-day">--</div>
+        <div class="sub" id="kpi-best-date">--</div>
+      </div>
+      <div class="kpi">
+        <h3>Worst Day</h3>
+        <div class="value danger" id="kpi-worst-day">--</div>
+        <div class="sub" id="kpi-worst-date">--</div>
+      </div>
+    </div>
+
+    <!-- Stacked Bar: Daily Cost by Model -->
+    <div class="chart-full">
+      <h2>Daily Cost by Model (USD)</h2>
+      <div class="model-legend" id="modelLegend"></div>
+      <div class="chart-wrap"><canvas id="barChart"></canvas></div>
+    </div>
+
+    <!-- Two charts side by side -->
+    <div class="charts">
+      <div class="chart-card">
+        <h2>Cost Trend (USD/day)</h2>
+        <div class="chart-wrap"><canvas id="lineChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <h2>Token Volume (K tokens/day)</h2>
+        <div class="chart-wrap"><canvas id="tokenChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Daily Breakdown Table -->
+    <div class="table-card">
+      <h2>Daily Breakdown</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>MiniMax</th>
+            <th>Sonnet</th>
+            <th>Opus</th>
+            <th>Haiku</th>
+            <th>Other</th>
+            <th>Total Cost</th>
+            <th>Total Tokens</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"><tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px;">Loading...</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      Data sourced from OpenRouter API. Updates every 30 minutes. Auto-refreshes every 5 minutes.
+    </div>
+  </div>
+
+<script>
+// State
+let rawData = null;
+let barChart = null;
+let lineChart = null;
+let tokenChart = null;
+
+const MODEL_COLORS = {
+  minimax: '#38bdf8',
+  sonnet: '#34d399',
+  opus: '#fbbf24',
+  haiku: '#f472b6',
+  other: '#94a3b8',
+};
+
+const MODEL_NAMES = {
+  minimax: 'MiniMax M2.7',
+  sonnet: 'Claude Sonnet 4.6',
+  opus: 'Claude Opus 4.6',
+  haiku: 'Claude Haiku 3.5',
+  other: 'Other',
+};
+
+// ── Fetch data ────────────────────────────────────────────────────────────────
+async function fetchData() {
+  const btn = document.getElementById('refreshBtn');
+  if (btn) btn.disabled = true;
+  try {
+    const res = await fetch('/api/usage');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    rawData = await res.json();
+    renderAll();
+    document.getElementById('lastUpdated').textContent =
+      `Updated ${new Date(rawData.updated_at).toLocaleTimeString()}`;
+    document.getElementById('staleBanner').style.display =
+      rawData.stale ? 'block' : 'none';
+  } catch (e) {
+    console.error('Fetch error:', e);
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+async function forceRefresh() {
+  const btn = document.getElementById('refreshBtn');
+  if (btn) btn.disabled = true;
+  btn.textContent = 'Refreshing...';
+  try {
+    const res = await fetch('/api/refresh');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    rawData = await res.json();
+    renderAll();
+    document.getElementById('lastUpdated').textContent =
+      `Updated ${new Date(rawData.updated_at).toLocaleTimeString()}`;
+    document.getElementById('staleBanner').style.display =
+      rawData.stale ? 'block' : 'none';
+  } catch (e) {
+    console.error('Refresh error:', e);
+  } finally {
+    if (btn) btn.disabled = false;
+    btn.textContent = 'Refresh Data';
+  }
+}
+
+// ── Filter data ───────────────────────────────────────────────────────────────
+function getFilteredDays() {
+  if (!rawData || !rawData.daily) return [];
+  const range = parseInt(document.getElementById('rangeFilter').value) || 30;
+  const model = document.getElementById('modelFilter').value;
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - range);
+  const cutoffStr = cutoff.toISOString().split('T')[0];
+
+  return rawData.daily
+    .filter(d => d.date >= cutoffStr)
+    .map(d => {
+      if (model === 'all') return d;
+      // Filter to single model
+      const models = {};
+      if (d.models && d.models[model]) {
+        models[model] = d.models[model];
+      }
+      return { ...d, models };
+    })
+    .filter(d => d.date);
+}
+
+// ── Render KPIs ───────────────────────────────────────────────────────────────
+function renderKPIs(days) {
+  const today = new Date().toISOString().split('T')[0];
+  const currentMonth = today.substring(0, 7);
+
+  const todayData = days.find(d => d.date === today) || { total_cost: 0, total_tokens: 0 };
+  const mtdDays = days.filter(d => d.date.startsWith(currentMonth));
+
+  const mtdCost = mtdDays.reduce((sum, d) => sum + (d.total_cost || 0), 0);
+  const mtdTokens = mtdDays.reduce((sum, d) => sum + (d.total_tokens || 0), 0);
+
+  // EOM projection
+  const daysSoFar = mtdDays.length || 1;
+  const daysInMonth = new Date(parseInt(today.split('-')[0]), parseInt(today.split('-')[1]), 0).getDate();
+  const eomProjection = daysInMonth > 0 ? (mtdCost / daysSoFar) * daysInMonth : mtdCost;
+
+  // Best / worst day
+  const sorted = [...mtdDays].sort((a, b) => b.total_cost - a.total_cost);
+  const best = sorted[sorted.length - 1] || { total_cost: 0, date: '--' };
+  const worst = sorted[0] || { total_cost: 0, date: '--' };
+
+  document.getElementById('kpi-today-cost').textContent = '$' + (todayData.total_cost || 0).toFixed(4);
+  document.getElementById('kpi-today-tokens').textContent = formatTokens(todayData.total_tokens || 0);
+  document.getElementById('kpi-mtd-cost').textContent = '$' + mtdCost.toFixed(4);
+  document.getElementById('kpi-mtd-tokens').textContent = formatTokens(mtdTokens);
+  document.getElementById('kpi-proj-cost').textContent = '$' + eomProjection.toFixed(4);
+  document.getElementById('kpi-total-cost').textContent =
+    '$' + (rawData?.openrouter_total_cost || 0).toFixed(4);
+  document.getElementById('kpi-total-tokens').textContent =
+    formatTokens(rawData?.openrouter_total_tokens || 0);
+  document.getElementById('kpi-best-day').textContent = '$' + (best.total_cost || 0).toFixed(4);
+  document.getElementById('kpi-best-date').textContent = best.date || '--';
+  document.getElementById('kpi-worst-day').textContent = '$' + (worst.total_cost || 0).toFixed(4);
+  document.getElementById('kpi-worst-date').textContent = worst.date || '--';
+}
+
+function formatTokens(n) {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + 'M';
+  if (n >= 1_000) return (n / 1_000).toFixed(1) + 'K';
+  return n.toString();
+}
+
+// ── Render bar chart (daily cost by model) ────────────────────────────────────
+function renderBarChart(days) {
+  const ctx = document.getElementById('barChart');
+  const model = document.getElementById('modelFilter').value;
+  const labels = days.map(d => d.date);
+
+  const modelKeys = model !== 'all' ? [model] : ['minimax', 'sonnet', 'opus', 'haiku', 'other'];
+
+  const datasets = modelKeys.map(m => ({
+    label: MODEL_NAMES[m] || m,
+    data: days.map(d => {
+      const md = d.models && d.models[m];
+      return md ? (md.cost || 0) : 0;
+    }),
+    backgroundColor: MODEL_COLORS[m] || '#94a3b8',
+    borderRadius: 3,
+    borderSkipped: false,
+  }));
+
+  if (barChart) barChart.destroy();
+  barChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: $${(ctx.raw || 0).toFixed(4)}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#94a3b8', maxTicksLimit: 14 },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          stacked: true,
+        },
+        y: {
+          ticks: { color: '#94a3b8', callback: v => '$' + v.toFixed(3) },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          stacked: true,
+          beginAtZero: true,
+        }
+      }
+    }
+  });
+
+  // Render legend
+  const legendEl = document.getElementById('modelLegend');
+  legendEl.innerHTML = modelKeys.map(m =>
+    `<div class="legend-item">
+      <span class="legend-dot" style="background:${MODEL_COLORS[m]}"></span>
+      ${MODEL_NAMES[m] || m}
+    </div>`
+  ).join('');
+}
+
+// ── Render line chart (cost trend) ─────────────────────────────────────────────
+function renderLineChart(days) {
+  const ctx = document.getElementById('lineChart');
+  const labels = days.map(d => d.date);
+  const costs = days.map(d => d.total_cost || 0);
+
+  if (lineChart) lineChart.destroy();
+  lineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Total Cost (USD)',
+        data: costs,
+        borderColor: '#7c3aed',
+        backgroundColor: 'rgba(124,58,237,0.1)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointBackgroundColor: '#7c3aed',
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `$${(ctx.raw || 0).toFixed(4)}` } }
+      },
+      scales: {
+        x: { ticks: { color: '#94a3b8', maxTicksLimit: 10 }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: {
+          ticks: { color: '#94a3b8', callback: v => '$' + v.toFixed(3) },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          beginAtZero: true,
+        }
+      }
+    }
+  });
+}
+
+// ── Render token volume chart ─────────────────────────────────────────────────
+function renderTokenChart(days) {
+  const ctx = document.getElementById('tokenChart');
+  const labels = days.map(d => d.date);
+  const model = document.getElementById('modelFilter').value;
+  const modelKeys = model !== 'all' ? [model] : ['minimax', 'sonnet', 'opus', 'haiku', 'other'];
+
+  const datasets = modelKeys.map(m => ({
+    label: MODEL_NAMES[m] || m,
+    data: days.map(d => {
+      const md = d.models && d.models[m];
+      return md ? ((md.tokens || 0) / 1000) : 0;
+    }),
+    backgroundColor: MODEL_COLORS[m] || '#94a3b8',
+    borderRadius: 3,
+  }));
+
+  if (tokenChart) tokenChart.destroy();
+  tokenChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${(ctx.raw || 0).toFixed(1)}K tokens` } }
+      },
+      scales: {
+        x: { ticks: { color: '#94a3b8', maxTicksLimit: 10 }, grid: { color: 'rgba(255,255,255,0.05)' }, stacked: true },
+        y: {
+          ticks: { color: '#94a3b8', callback: v => v.toFixed(0) + 'K' },
+          grid: { color: 'rgba(255,255,255,0.05)' },
+          stacked: true,
+          beginAtZero: true,
+          title: { display: true, text: 'Tokens (K)', color: '#94a3b8', font: { size: 11 } },
+        }
+      }
+    }
+  });
+}
+
+// ── Render table ─────────────────────────────────────────────────────────────
+function renderTable(days) {
+  const tbody = document.getElementById('tableBody');
+  const model = document.getElementById('modelFilter').value;
+  const showDays = days.slice(-30).reverse();
+
+  if (showDays.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:30px;">No data available</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = showDays.map(d => {
+    const mini = d.models?.minimax || {};
+    const sonnet = d.models?.sonnet || {};
+    const opus = d.models?.opus || {};
+    const haiku = d.models?.haiku || {};
+    const other = d.models?.other || {};
+
+    return `<tr>
+      <td class="date-cell">${d.date}</td>
+      <td>${mini.tokens ? `<span class="model-dot dot-minimax"></span>${fmtTokens(mini.tokens)} ($${(mini.cost||0).toFixed(4)})` : '-'}</td>
+      <td>${sonnet.tokens ? `<span class="model-dot dot-sonnet"></span>${fmtTokens(sonnet.tokens)} ($${(sonnet.cost||0).toFixed(4)})` : '-'}</td>
+      <td>${opus.tokens ? `<span class="model-dot dot-opus"></span>${fmtTokens(opus.tokens)} ($${(opus.cost||0).toFixed(4)})` : '-'}</td>
+      <td>${haiku.tokens ? `<span class="model-dot dot-haiku"></span>${fmtTokens(haiku.tokens)} ($${(haiku.cost||0).toFixed(4)})` : '-'}</td>
+      <td>${other.tokens ? `<span class="model-dot dot-other"></span>${fmtTokens(other.tokens)} ($${(other.cost||0).toFixed(4)})` : '-'}</td>
+      <td class="cost-cell">$${(d.total_cost||0).toFixed(4)}</td>
+      <td>${fmtTokens(d.total_tokens||0)}</td>
+    </tr>`;
+  }).join('');
+}
+
+function fmtTokens(n) {
+  if (!n) return '0';
+  if (n >= 1_000_000) return (n/1_000_000).toFixed(1)+'M';
+  if (n >= 1_000) return (n/1_000).toFixed(1)+'K';
+  return n.toString();
+}
+
+// ── Render all ────────────────────────────────────────────────────────────────
+function renderAll() {
+  if (!rawData) return;
+  const days = getFilteredDays();
+  renderKPIs(days);
+  renderBarChart(days);
+  renderLineChart(days);
+  renderTokenChart(days);
+  renderTable(days);
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+fetchData();
+setInterval(fetchData, 5 * 60 * 1000); // auto-refresh every 5 min
+</script>
+</body>
+</html>

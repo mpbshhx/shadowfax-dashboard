@@ -1,0 +1,12 @@
+{
+  "name": "shadowfax-token-dashboard",
+  "version": "1.0.0",
+  "description": "Token usage dashboard for Marcus's AI operation",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

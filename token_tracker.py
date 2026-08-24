@@ -105,10 +105,15 @@ def load_usage_log():
         return []
 
     entries = []
-    with open(log_path, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            entries.append(row)
+    for enc in ('utf-8', 'cp1252'):
+        try:
+            with open(log_path, 'r', encoding=enc) as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    entries.append(row)
+            break
+        except UnicodeDecodeError:
+            continue
 
     return entries
 

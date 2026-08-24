@@ -1,0 +1,121 @@
+================================================================================
+SHADOWFAX TOKEN USAGE DASHBOARD - BUILD COMPLETE
+================================================================================
+
+Output Directory: C:\Temp\token-dashboard-build\
+
+DELIVERABLES:
+============
+
+1. token_tracker.py (7.5K)
+   - Reads usage-log.csv from OpenClaw workspace
+   - Queries Anthropic & HuggingFace APIs for balances
+   - Aggregates last 30 days by date + model
+   - Estimates tokens (2000/run avg) and costs
+   - Outputs: usage-data.json
+   - Cost models: Kimi $.15/M, Sonnet $3/M, Opus $15/M, Haiku $1/M
+
+2. index.html (14K)
+   - Dark theme dashboard (#1a1a2e bg, #7c3aed accent)
+   - KPI cards: Today cost, MTD cost, HF balance, active models
+   - Line chart: 30-day cost trend by model
+   - Bar chart: 30-day token volume (stacked)
+   - Table: Last 7 days detailed breakdown
+   - Auto-refresh every 5 minutes
+   - Works offline (file:// protocol)
+   - Uses Chart.js CDN
+
+3. discord_report.py (4.8K)
+   - Formats daily summary report
+   - Posts to Discord #morning-briefs (ID: 1482153149992144996)
+   - Includes: costs, HF balance, run counts, ASCII sparkline
+   - Reads Discord token from openclaw.json
+
+4. requirements.txt (9B)
+   - requests (only dependency)
+
+5. usage-data.json (7.2K)
+   - Generated aggregated data
+   - Last 30 days of usage
+   - Updated_at timestamp, HF balance, daily breakdowns
+
+6. README.md (3.3K)
+   - Full documentation
+   - Component descriptions
+   - Setup instructions
+   - Data flow diagram
+   - Automation guide
+
+7. QUICKSTART.md (3.8K)
+   - Installation steps
+   - Usage examples
+   - Automation setup (Task Scheduler / OpenClaw cron)
+   - Troubleshooting guide
+   - Daily workflow
+
+VERIFIED FUNCTIONALITY:
+======================
+
+[x] token_tracker.py runs successfully
+[x] Reads usage-log.csv (30 entries processed)
+[x] Generates usage-data.json
+[x] Handles missing API keys gracefully
+[x] UTF-8 encoding throughout
+[x] discord_report.py runs successfully
+[x] Sends message to Discord #morning-briefs
+[x] ASCII sparkline works (simplified chars for Windows)
+[x] index.html created with all charts/tables
+[x] No em dashes anywhere
+[x] All paths use absolute Windows paths
+[x] OpenClaw system event fired
+
+COST ESTIMATES:
+===============
+
+Per million tokens (blended input/output):
+- Kimi K2.5: $0.15/M
+- Claude Haiku 3.5: $1.00/M
+- Claude Sonnet 4.6: $3.00/M
+- Claude Opus 4.6: $15.00/M
+
+Average: 2000 tokens per cron run
+
+NEXT STEPS:
+===========
+
+1. View dashboard:
+   start C:\Temp\token-dashboard-build\index.html
+
+2. Set up daily automation (8 AM):
+   schtasks /create /tn "TokenDashboard" /tr "python C:\Temp\token-dashboard-build\token_tracker.py && python C:\Temp\token-dashboard-build\discord_report.py" /sc daily /st 08:00
+
+3. Or add to OpenClaw cron config for automated daily reports
+
+CONFIGURATION:
+==============
+
+Reads from: C:\Users\hhx-sandbox2\.openclaw\openclaw.json
+- env.ANTHROPIC_API_KEY (optional, uses CSV fallback)
+- env.HF_TOKEN (optional)
+- channels.discord.token (required for Discord reports)
+
+Usage log: C:\Users\hhx-sandbox2\.openclaw\workspace\memory\usage-log.csv
+Output: C:\Users\hhx-sandbox2\.openclaw\workspace\token-dashboard\usage-data.json
+
+FEATURES:
+=========
+
+- 30-day rolling window
+- Multi-model tracking (Kimi, Sonnet, Opus, Haiku)
+- Real-time API balance checks
+- Beautiful dark theme UI
+- Auto-refreshing dashboard
+- Daily Discord summaries with trend sparklines
+- Offline-capable (no server needed)
+- Graceful degradation (works without API keys)
+
+BUILD DATE: 2026-03-17
+BUILDER: Claude Sonnet 4.5
+STATUS: COMPLETE ✓
+
+================================================================================

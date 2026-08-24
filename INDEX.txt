@@ -1,0 +1,163 @@
+================================================================================
+                    SHADOWFAX TOKEN DASHBOARD
+                    Complete Build Package
+================================================================================
+
+DIRECTORY: C:\Temp\token-dashboard-build\
+
+QUICK START:
+============
+1. View Dashboard   -> Double-click: open-dashboard.bat
+2. Update Data      -> Double-click: update-dashboard.bat
+3. Read Docs        -> Open: QUICKSTART.md
+
+FILE INVENTORY (11 files, 49KB total):
+======================================
+
+CORE COMPONENTS:
+---------------
+token_tracker.py (7.5K)
+  - Data aggregation engine
+  - Reads: usage-log.csv
+  - Queries: Anthropic API, HuggingFace API
+  - Outputs: usage-data.json (30 days)
+  - Run: python token_tracker.py
+
+index.html (14K)
+  - Interactive dashboard UI
+  - Dark theme (#1a1a2e bg, #7c3aed accent)
+  - Charts: Line (cost trend), Bar (token volume)
+  - Auto-refreshes every 5 minutes
+  - Open: start index.html
+
+discord_report.py (4.8K)
+  - Daily report generator
+  - Posts to: Discord #morning-briefs (1482153149992144996)
+  - Format: Cost summary + ASCII sparkline
+  - Run: python discord_report.py
+
+usage-data.json (7.2K)
+  - Generated aggregated data
+  - 30 days of usage by model
+  - Updated: 2026-03-17
+  - Auto-created by token_tracker.py
+
+DOCUMENTATION:
+--------------
+README.md (3.3K)
+  - Full system documentation
+  - Component descriptions
+  - Setup & configuration
+  - Data flow diagram
+
+QUICKSTART.md (3.8K)
+  - Installation guide
+  - Usage examples
+  - Automation setup
+  - Troubleshooting
+
+CHECKLIST.md (4.4K)
+  - Build verification checklist
+  - Requirements coverage
+  - Testing results
+  - Known limitations
+
+SUMMARY.txt (3.7K)
+  - Build summary
+  - Deliverables overview
+  - Cost estimates
+  - Next steps
+
+UTILITIES:
+----------
+requirements.txt (9 bytes)
+  - Python dependencies: requests
+  - Install: pip install -r requirements.txt
+
+update-dashboard.bat (804 bytes)
+  - Runs tracker + Discord report
+  - Full automation script
+  - Double-click to execute
+
+open-dashboard.bat (67 bytes)
+  - Quick launcher for dashboard
+  - Opens index.html in browser
+
+DATA SOURCES:
+=============
+Input:  C:\Users\hhx-sandbox2\.openclaw\workspace\memory\usage-log.csv
+Config: C:\Users\hhx-sandbox2\.openclaw\openclaw.json
+Output: C:\Users\hhx-sandbox2\.openclaw\workspace\token-dashboard\usage-data.json
+        C:\Temp\token-dashboard-build\usage-data.json (local copy)
+
+FEATURES:
+=========
+[x] 30-day rolling usage window
+[x] Multi-model tracking (Kimi, Sonnet, Opus, Haiku)
+[x] Real-time API balance checks
+[x] Cost estimation ($0.15-$15/M tokens)
+[x] Dark theme dashboard
+[x] Auto-refreshing charts
+[x] Daily Discord summaries
+[x] ASCII sparkline trends
+[x] Offline-capable (no server)
+[x] Graceful API fallbacks
+[x] Windows batch automation
+[x] Comprehensive docs
+
+COST MODELS:
+============
+Kimi K2.5:          $0.15 per million tokens (cheapest)
+Claude Haiku 3.5:   $1.00 per million tokens
+Claude Sonnet 4.6:  $3.00 per million tokens (primary)
+Claude Opus 4.6:   $15.00 per million tokens (expensive)
+
+Average estimate: 2000 tokens per cron run
+
+COLOR SCHEME:
+=============
+Background: #1a1a2e (dark navy)
+Accent:     #7c3aed (purple)
+Kimi:       #3b82f6 (blue)
+Sonnet:     #10b981 (green)
+Opus:       #f59e0b (orange)
+Haiku:      #ec4899 (pink)
+
+AUTOMATION OPTIONS:
+===================
+Option 1: Manual
+  -> Double-click: update-dashboard.bat
+
+Option 2: Windows Task Scheduler
+  -> schtasks /create /tn "TokenDashboard" /tr "C:\Temp\token-dashboard-build\update-dashboard.bat" /sc daily /st 08:00
+
+Option 3: OpenClaw Cron
+  -> Add to openclaw.json cron config (see README.md)
+
+VERIFIED:
+=========
+[x] token_tracker.py executes successfully (30 entries processed)
+[x] discord_report.py sends to Discord #morning-briefs
+[x] usage-data.json validates (30 days, valid JSON)
+[x] index.html structure complete (KPIs + charts + table)
+[x] OpenClaw system event fired
+[x] No em dashes anywhere
+[x] UTF-8 encoding throughout
+[x] Graceful API error handling
+
+BUILD INFO:
+===========
+Date:    2026-03-17
+Builder: Claude Sonnet 4.5
+Status:  COMPLETE
+Version: 1.0
+
+SUPPORT:
+========
+Issues:  Check QUICKSTART.md Troubleshooting section
+Logs:    C:\tmp\openclaw\openclaw-YYYY-MM-DD.log
+Config:  C:\Users\hhx-sandbox2\.openclaw\openclaw.json
+
+================================================================================
+Ready for deployment! Run update-dashboard.bat to generate first report.
+================================================================================
